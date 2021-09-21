@@ -1,6 +1,7 @@
 package ercanduman.fcmmessagingdemo.data.service
 
 import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 import ercanduman.fcmmessagingdemo.util.logger
 
 /**
@@ -22,6 +23,12 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
         // If you want to send messages to only this application instance from the server side, then send
         // the FCM registration token to you app server.
         sendRegistrationToServer(newToken)
+    }
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        super.onMessageReceived(remoteMessage)
+        logger(remoteMessage.notification?.title)
+        logger(remoteMessage.notification?.body)
     }
 
     private fun sendRegistrationToServer(token: String) {

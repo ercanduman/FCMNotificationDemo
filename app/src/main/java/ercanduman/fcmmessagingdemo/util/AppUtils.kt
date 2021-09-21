@@ -15,6 +15,6 @@ import ercanduman.fcmmessagingdemo.BuildConfig
  *
  * @param message Debug logging message
  */
-fun Any.logger(message: String) {
+fun Any.logger(message: String? = "") {
     if (BuildConfig.DEBUG) Log.d(this.javaClass.name, "Debug logger: $message")
 }
