@@ -1,4 +1,4 @@
-package ercanduman.fcmmessagingdemo
+package ercanduman.fcmmessagingdemo.ui.main
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import ercanduman.fcmmessagingdemo.R
 import ercanduman.fcmmessagingdemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
