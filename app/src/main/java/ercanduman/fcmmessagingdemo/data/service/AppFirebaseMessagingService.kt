@@ -2,6 +2,7 @@ package ercanduman.fcmmessagingdemo.data.service
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import ercanduman.fcmmessagingdemo.data.internal.NotificationHelper
 import ercanduman.fcmmessagingdemo.util.logger
 
 /**
@@ -27,12 +28,16 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
-        logger(remoteMessage.notification?.title)
-        logger(remoteMessage.notification?.body)
+        remoteMessage.notification?.let { notification ->
+            val title = notification.title ?: "Title not provided."
+            val content = notification.body ?: "Content not provided."
+            NotificationHelper.displayNotification(this, title, content)
+        }
+
     }
 
     private fun sendRegistrationToServer(token: String) {
         // TODO: 21.09.2021 Add retrofit implementation here to send the token to backend server.
-        logger(token)
+        logger("Token:\n$token")
     }
 }
