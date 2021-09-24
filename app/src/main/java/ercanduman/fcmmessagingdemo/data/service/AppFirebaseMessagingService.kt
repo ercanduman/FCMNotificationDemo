@@ -31,9 +31,10 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage.notification?.let { notification ->
             val title = notification.title ?: "Title not provided."
             val content = notification.body ?: "Content not provided."
-            NotificationHelper.displayNotification(this, title, content)
-        }
 
+            val documentId = remoteMessage.data["documentId"] ?: "documentId not provided."
+            NotificationHelper.displayNotification(this, title, content, documentId)
+        }
     }
 
     private fun sendRegistrationToServer(token: String) {

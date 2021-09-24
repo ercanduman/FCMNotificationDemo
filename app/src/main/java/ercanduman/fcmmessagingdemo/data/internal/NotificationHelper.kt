@@ -21,18 +21,24 @@ object NotificationHelper {
     private const val JOB_ID = 101
     private const val CHANNEL_ID = "ercanduman.fcmmessagingdemo.CHANNEL_ID"
 
-    fun displayNotification(context: Context, title: String = "", message: String = "") {
+    fun displayNotification(
+        context: Context, title: String = "", message: String = "", documentId: String = ""
+    ) {
         val appContext = context.applicationContext
+
+        val intent = Intent(appContext, MainActivity::class.java)
+        intent.putExtra(MainActivity.KEY_EXTRA_DOCUMENT_ID, documentId)
 
         // Start MainActivity if notification clicked.
         val pendingIntent =
             PendingIntent.getActivity(
-                appContext, 0, Intent(appContext, MainActivity::class.java),
+                appContext, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
         val builder = NotificationCompat.Builder(appContext, CHANNEL_ID)
             .setContentTitle(title)
+            .setAutoCancel(true)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentIntent(pendingIntent)
 
