@@ -1,16 +1,17 @@
 package ercanduman.fcmmessagingdemo.ui.main
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.google.android.material.snackbar.Snackbar
 import ercanduman.fcmmessagingdemo.R
 import ercanduman.fcmmessagingdemo.databinding.ActivityMainBinding
+import ercanduman.fcmmessagingdemo.util.logger
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }
+
+        intent?.let {
+            val documentId = it.getStringExtra(KEY_EXTRA_DOCUMENT_ID)
+            logger("onCreate: Passed Document is: $documentId")
         }
     }
 
@@ -55,5 +61,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    companion object {
+        const val KEY_EXTRA_DOCUMENT_ID = "ercanduman.fcmmessagingdemo.KEY_EXTRA_DOCUMENT_ID"
     }
 }

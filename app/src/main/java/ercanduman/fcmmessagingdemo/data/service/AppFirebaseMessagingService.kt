@@ -33,6 +33,7 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
             val content = notification.body ?: "Content not provided."
 
             val documentId = remoteMessage.data["documentId"] ?: "documentId not provided."
+            logger("onMessageReceived: Passed documentId: $documentId")
             NotificationHelper.displayNotification(this, title, content, documentId)
         }
     }
